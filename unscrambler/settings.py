@@ -84,7 +84,14 @@ DATABASES = {
         "USER": 'postgres',
         "PASSWORD": 'sarwan',
         "HOST": 'localhost',
-    }
+    },
+    'test': {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": 'unscrambler',
+        "USER": 'postgres',
+        "PASSWORD": 'sarwan',
+        "HOST": 'localhost',
+    },
 }
 
 
