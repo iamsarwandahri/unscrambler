@@ -3,16 +3,18 @@ from django.http import JsonResponse
 import json
 from .models import Word
 from itertools import combinations, product
-from django.db.models import Q
 import re
+
 
 def has_valid_characters(input_string):
     regex = re.compile(r'^[a-zA-Z0-9?]+$')
 
     return bool(regex.match(input_string))
 
+
 def index(request):
     return render(request, 'index.html')
+
 
 def search(request):
     if request.method == "POST":
@@ -72,6 +74,6 @@ def unscramble_words(scrambled_word):
         for length in range(1, len(scrambled_word)+1):
             possible_words.extend([(''.join(sorted(t))) for t in combinations(scrambled_word, length)])
 
-    valid_words = list(Word.objects.filter(Q(sorted_word__in=possible_words)).values_list('word', flat=True))
+    valid_words = list(Word.objects.filter(sorted_word__in=possible_words).values_list('word', flat=True))
 
     return valid_words
